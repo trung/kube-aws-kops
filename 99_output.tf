@@ -9,3 +9,11 @@ output "AZs" {
 output "StateBucket" {
   value = "${var.KopsBucketName}"
 }
+
+output "VPCId" {
+  value = "${aws_vpc.kubernetes.id}"
+}
+
+output "Cidr" {
+  value = "${var.VpcCidr}"
+}
