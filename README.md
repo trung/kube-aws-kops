@@ -14,7 +14,6 @@ kops create cluster ${NAME} \
  --zones ${AZs} \
  --cloud aws \
  --vpc ${VPC} \
- --networking private \
- --network-cidr ${NETWORK_CIDR}
+ --network-cidr ${NETWORK_CIDR} \
  --state ${KOPS_STATE_STORE}
 ```
