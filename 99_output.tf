@@ -17,3 +17,7 @@ output "VPCId" {
 output "Cidr" {
   value = "${var.VpcCidr}"
 }
+
+output "MyIP" {
+  value = "${var.MyIP}"
+}

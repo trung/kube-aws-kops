@@ -9,9 +9,9 @@ variable "Name" {
 variable "CommonTags" {
   type = "map"
   default = {
-    builtBy = "trung"
-    builtWith = "terraform"
-    builtReason = "Provisioning Kubernetes in AWS"
+    BuiltBy = "trung"
+    BuiltWith = "terraform"
+    BuiltReason = "Provisioning Kubernetes in AWS using Kops"
   }
 }
 

@@ -5,12 +5,13 @@ resource "aws_vpc" "kubernetes" {
   tags = "${merge(var.CommonTags, map("Name", "Kubernetes-VPC"))}"
 }
 
+
 resource "aws_internet_gateway" "kubernetes" {
   vpc_id = "${aws_vpc.kubernetes.id}"
 
   tags = "${merge(var.CommonTags, map("Name", "Kubernetes-GW"))}"
 }
-
+/*
 resource "aws_subnet" "kubernetes" {
   count = "${data.aws_availability_zones.available.count}"
   cidr_block = "10.10.${count.index + 1}.0/24"
@@ -36,3 +37,4 @@ resource "aws_route_table_association" "kubernetes" {
   route_table_id = "${aws_default_route_table.kubernetes.id}"
   subnet_id = "${element(aws_subnet.kubernetes.*.id, count.index)}"
 }
+*/

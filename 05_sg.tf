@@ -1,3 +1,4 @@
+/*
 resource "aws_security_group" "common" {
   vpc_id = "${aws_vpc.kubernetes.id}"
 
@@ -25,3 +26,4 @@ resource "aws_security_group" "ssh" {
 
   tags = "${merge(var.CommonTags, map("Name", "Kubernetes-debug"))}"
 }
+*/
