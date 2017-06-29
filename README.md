@@ -22,5 +22,11 @@ kops create cluster ${NAME} \
  --state ${KOPS_STATE_STORE} \
  --admin-access ${MY_IP_CIDR} \
  --ssh-public-key ./kops-key.pub \
+ --image ami-9fe6c7ff \
  --target terraform
 ```
+
+Findings:
+1. `nodeup` installs packages and setups the OS:
+   * `nodeup`: https://kubeupv2.s3.amazonaws.com/kops/1.6.1/linux/amd64/nodeup
+   *

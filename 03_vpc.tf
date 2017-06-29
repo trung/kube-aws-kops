@@ -11,17 +11,17 @@ resource "aws_internet_gateway" "kubernetes" {
 
   tags = "${merge(var.CommonTags, map("Name", "Kubernetes-GW"))}"
 }
-/*
-resource "aws_subnet" "kubernetes" {
-  count = "${data.aws_availability_zones.available.count}"
-  cidr_block = "10.10.${count.index + 1}.0/24"
-  vpc_id = "${aws_vpc.kubernetes.id}"
-  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
 
-  tags = "${merge(var.CommonTags, map("Name", format("Kubernetes-%s", data.aws_availability_zones.available.names[count.index])))}"
+# public subnet that is used for an EC2 instance on which we use it as a jumphost
+resource "aws_subnet" "kops-jumphost" {
+  cidr_block = "10.10.10.10/30"
+  vpc_id = "${aws_vpc.kubernetes.id}"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
+
+  tags = "${merge(var.CommonTags, map("Name", format("K8s-kops-jumphost-%s", data.aws_availability_zones.available.names[0])))}"
 }
 
-resource "aws_default_route_table" "kubernetes" {
+resource "aws_default_route_table" "kops-jumphost" {
   default_route_table_id = "${aws_vpc.kubernetes.default_route_table_id}"
 
   route {
@@ -29,12 +29,10 @@ resource "aws_default_route_table" "kubernetes" {
     gateway_id = "${aws_internet_gateway.kubernetes.id}"
   }
 
-  tags = "${merge(var.CommonTags, map("Name", "Kubernetes-DefaultRoute"))}"
+  tags = "${merge(var.CommonTags, map("Name", "K8s-kops-jumphost-DefaultRoute"))}"
 }
 
 resource "aws_route_table_association" "kubernetes" {
-  count = "${aws_subnet.kubernetes.count}"
-  route_table_id = "${aws_default_route_table.kubernetes.id}"
-  subnet_id = "${element(aws_subnet.kubernetes.*.id, count.index)}"
+  route_table_id = "${aws_default_route_table.kops-jumphost.id}"
+  subnet_id = "${aws_subnet.kops-jumphost.id}"
 }
-*/

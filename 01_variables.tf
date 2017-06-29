@@ -15,6 +15,14 @@ variable "CommonTags" {
   }
 }
 
+variable "JumpHostAMI" {
+  default = "ami-9fe6c7ff"  # us-west-1
+}
+
+variable "JumpHostInstanceType" {
+  default = "t2.micro"
+}
+
 variable "VpcCidr" {
   default = "10.10.0.0/16"
 }

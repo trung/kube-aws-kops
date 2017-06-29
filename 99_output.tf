@@ -21,3 +21,7 @@ output "Cidr" {
 output "MyIP" {
   value = "${var.MyIP}"
 }
+
+output "JumpHost" {
+  value = "${format("ssh -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\" -i trung-ec2-key-us-west-1.pem ubuntu@%s", aws_instance.kops-jumphost.public_ip)}"
+}
