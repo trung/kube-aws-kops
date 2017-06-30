@@ -21,12 +21,12 @@ kops create cluster ${NAME} \
  --state ${KOPS_STATE_STORE} \
  --admin-access ${NETWORK_CIDR} \
  --ssh-public-key ./kops-key.pub \
- --image ami-9fe6c7ff \
- --target terraform
+ --image ami-9fe6c7ff
+# --target terraform
 ```
 
 **Note:**
-+ Create jumphost separately with `kops` and `kubectl` installed
-+ Jumphost must have outbound 443 so it can communicate with master
-+ Need to add inbound 443 into master manually `kops` bug???
++ Terraform template generated doesn't work!!! **UrrrGgg**
++ Need to add inbound 443 into master security group manually
 + `~/.kube/config` setups `kube-apiserver` endpoint to the external DNS
++ When exposing `LoadBalancer` service, a security group with inbound is too wide open
