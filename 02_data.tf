@@ -40,6 +40,26 @@ data "aws_iam_policy_document" "k8s-binaries-repsitory" {
   }
 }
 
+data "aws_iam_policy_document" "kops-jumphost" {
+  statement {
+    sid = "Access-for-kops-jumphost"
+    actions = [
+      "s3:*",
+    ]
+    resources = [
+      "arn:aws:s3:::${var.KopsBucketName}",
+      "arn:aws:s3:::${var.KopsBucketName}/*",
+      "arn:aws:s3:::${var.BinariesRepositoryBucketName}",
+      "arn:aws:s3:::${var.BinariesRepositoryBucketName}/*",
+    ]
+    principals {
+      identifiers = ["*"]
+      type = "AWS"
+    }
+  }
+}
+
+
 data "external" "Download-Kops" {
   program = ["sh",
     "./scripts/download.sh",
@@ -48,11 +68,20 @@ data "external" "Download-Kops" {
   ]
 }
 
+data "external" "Download-Kubectl" {
+  program = ["sh",
+    "./scripts/download.sh",
+    "${var.K8sBinaries["kubectl.url"]}",
+    "${var.K8sBinaries["kubectl.outputFile"]}"
+  ]
+}
+
 data "template_file" "install_kops" {
   template = "${file("./scripts/tpl/install_kops.tpl.sh")}"
   vars {
     region = "${var.region}"
     bucket = "${aws_s3_bucket.k8s-binaries-repository.id}"
-    object = "${aws_s3_bucket_object.kops.key}"
+    kops = "${aws_s3_bucket_object.kops.key}"
+    kubectl = "${aws_s3_bucket_object.kubectl.key}"
   }
 }

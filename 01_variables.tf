@@ -52,5 +52,7 @@ variable "K8sBinaries" {
   default = {
     kops.url = "https://github.com/kubernetes/kops/releases/download/1.6.2/kops-linux-amd64"
     kops.outputFile = "./bin/kops"
+    kubectl.url = "https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl"
+    kubectl.outputFile = "./bin/kubectl"
   }
 }

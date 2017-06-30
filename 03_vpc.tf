@@ -41,7 +41,7 @@ resource "aws_route_table_association" "kubernetes" {
 resource "aws_vpc_endpoint" "s3-k8s-binaries-repository" {
   service_name = "com.amazonaws.${var.region}.s3"
   vpc_id = "${aws_vpc.kubernetes.id}"
-  policy = "${data.aws_iam_policy_document.k8s-binaries-repsitory.json}"
+  policy = "${data.aws_iam_policy_document.kops-jumphost.json}"
 }
 
 resource "aws_vpc_endpoint_route_table_association" "s3-kube-artifacts-repository" {
