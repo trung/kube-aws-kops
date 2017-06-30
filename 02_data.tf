@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "k8s-jpmchase-net-state-store" {
   }
 }
 
-data "aws_iam_policy_document" "k8s-binaries-repsitory" {
+data "aws_iam_policy_document" "k8s-binaries-repository" {
   statement {
     sid = "Access-to-k8s-binaries-repository"
     actions = [
