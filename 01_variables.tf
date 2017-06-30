@@ -42,3 +42,15 @@ variable "KeyPairName" {
 variable "KopsBucketName" {
   default = "k8s-jpmchase-net-state-store"
 }
+
+variable "BinariesRepositoryBucketName" {
+  default = "k8s-binaries-repository"
+}
+
+variable "K8sBinaries" {
+  type = "map"
+  default = {
+    kops.url = "https://github.com/kubernetes/kops/releases/download/1.6.2/kops-linux-amd64"
+    kops.outputFile = "./bin/kops"
+  }
+}

@@ -1,10 +1,17 @@
-/*
 resource "aws_security_group" "common" {
   vpc_id = "${aws_vpc.kubernetes.id}"
 
-  tags = "${merge(var.CommonTags, map("Name", "Kubernetes-common"))}"
+   # S3 access
+  egress {
+    from_port = 443
+    protocol = "TCP"
+    to_port = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = "${merge(var.CommonTags, map("Name", "K8s-common"))}"
 }
-*/
+
 resource "aws_security_group" "ssh" {
   vpc_id = "${aws_vpc.kubernetes.id}"
 
@@ -24,5 +31,5 @@ resource "aws_security_group" "ssh" {
     cidr_blocks = ["${var.MyIP}"]
   }
 
-  tags = "${merge(var.CommonTags, map("Name", "Kubernetes-debug"))}"
+  tags = "${merge(var.CommonTags, map("Name", "K8s-debug"))}"
 }
