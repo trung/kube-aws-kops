@@ -1,12 +1,14 @@
 # kube-aws-kops
 Kubernetes private cluster in AWS using Kops and Terraform. **All access via a jumphost**
 
+## Build
+
 Initial setup
 ```bash
 tf apply
 ```
 
-Create K8s cluster
+Generate Terraform template
 ```bash
 CMD="export AWS_PROFILE=lab"; echo $CMD; eval ${CMD}
 CMD="export NAME=$(tf output Name)"; echo "${CMD}"; eval ${CMD}
@@ -32,8 +34,29 @@ kops create cluster ${NAME} \
  --target terraform
 ```
 
-**Note:**
-+ Terraform template generated doesn't work!!! **UrrrGgg**
-+ Need to add inbound 443 into master security group manually
-+ `~/.kube/config` setups `kube-apiserver` endpoint to the external DNS
-+ When exposing `LoadBalancer` service, a security group with inbound is too wide open
+Create k8s cluster using the generated TF template
+```bash
+cd out/terraform
+tf apply
+```
+
+## Destroy
+
+Destroy k8s cluster
+```bash
+pushd out/terraform
+tf destroy
+popd
+kops delete cluster ${NAME} --yes
+```
+OR simpler
+```bash
+kops delete cluster ${NAME} --yes
+```
+
+Destroy the initial infra
+```bash
+tf destroy
+```
+
+*Yay! It works!!*
