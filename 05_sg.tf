@@ -15,12 +15,20 @@ resource "aws_security_group" "common" {
 resource "aws_security_group" "ssh" {
   vpc_id = "${aws_vpc.kubernetes.id}"
 
-  # ssh
+  # external ssh
   ingress {
     from_port = 22
     protocol = "TCP"
     to_port = 22
     cidr_blocks = ["${var.MyIP}"]
+  }
+
+  # ssh within VPC
+  egress {
+    from_port = 22
+    protocol = "TCP"
+    to_port = 22
+    cidr_blocks = ["${var.VpcCidr}"]
   }
 
   # ping

@@ -40,6 +40,13 @@ cd out/terraform
 tf apply
 ```
 
+**Note:** it will take sometimes for the cluster to stand up. Don't RUSH!!!
+
+Validate
+1. SSH to jump host
++  Create `~/.kube/config` with the content from the local machine
++  Run `kubectl get nodes` and see 3 nodes running
+
 ## Destroy
 
 Destroy k8s cluster
@@ -60,3 +67,8 @@ tf destroy
 ```
 
 *Yay! It works!!*
+
+## Few notes
+* `master` instance is also a `node`
+* `etcd` is in the `master`
+* When exposing a service of type `LoadBalancer`, a public-facing ELB is created
