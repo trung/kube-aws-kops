@@ -1,6 +1,7 @@
 resource "aws_s3_bucket" "k8s-jpmchase-net-state-store" {
   bucket = "${var.KopsBucketName}"
   acl = "private"
+  region = "${var.region}"
   policy = "${data.aws_iam_policy_document.k8s-jpmchase-net-state-store.json}"
 
   tags  = "${var.CommonTags}"
@@ -9,6 +10,7 @@ resource "aws_s3_bucket" "k8s-jpmchase-net-state-store" {
 resource "aws_s3_bucket" "k8s-binaries-repository" {
   bucket = "${var.BinariesRepositoryBucketName}"
   acl = "private"
+  region = "${var.region}"
   policy = "${data.aws_iam_policy_document.k8s-binaries-repository.json}"
 
   tags  = "${var.CommonTags}"

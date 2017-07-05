@@ -17,11 +17,13 @@ CMD="export AZs=$(tf output AZs)"; echo "${CMD}"; eval ${CMD}
 CMD="export VPC=$(tf output VPCId)"; echo "${CMD}"; eval ${CMD}
 CMD="export NETWORK_CIDR=$(tf output Cidr)"; echo "${CMD}"; eval ${CMD}
 CMD="export MyIP=$(tf output MyIP)"; echo "${CMD}"; eval ${CMD}
+CMD="export AMI=$(tf output AMI)"; echo "${CMD}"; eval ${CMD}
 kops create cluster ${NAME} \
  --dns private  \
  --topology private \
  --api-loadbalancer-type internal \
  --zones ${AZs} \
+ --master-zones ${AZs} \
  --cloud aws \
  --cloud-labels "BuiltBy=trung,BuiltReason=Provisioning Kuberenetes in AWS using Kops" \
  --vpc ${VPC} \
@@ -30,7 +32,7 @@ kops create cluster ${NAME} \
  --state ${KOPS_STATE_STORE} \
  --admin-access ${NETWORK_CIDR} \
  --ssh-public-key ./kops-key.pub \
- --image ami-9fe6c7ff \
+ --image ${AMI} \
  --target terraform
 ```
 

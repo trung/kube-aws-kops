@@ -23,5 +23,9 @@ output "MyIP" {
 }
 
 output "JumpHost" {
-  value = "${format("ssh -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\" -i trung-ec2-key-us-west-1.pem ubuntu@%s", aws_instance.kops-jumphost.public_ip)}"
+  value = "${format("ssh -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\" -i %s-%s.pem ubuntu@%s", var.KeyPairName, var.region, aws_instance.kops-jumphost.public_ip)}"
+}
+
+output "AMI" {
+  value = "${lookup(var.JumpHostAMI, var.region)}"
 }

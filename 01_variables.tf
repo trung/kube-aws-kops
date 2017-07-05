@@ -1,5 +1,5 @@
 variable "region" {
-  default = "us-west-1"
+  default = "eu-central-1"
 }
 
 variable "Name" {
@@ -16,7 +16,12 @@ variable "CommonTags" {
 }
 
 variable "JumpHostAMI" {
-  default = "ami-9fe6c7ff"  # us-west-1
+  type = "map"
+  default = {
+    us-west-1 = "ami-9fe6c7ff"
+    us-west-2 = "ami-45224425"
+    eu-central-1 = "ami-a74c95c8"
+  }
 }
 
 variable "JumpHostInstanceType" {
@@ -29,6 +34,7 @@ variable "VpcCidr" {
 
 variable "KmsKeyAlias" {
   default = "trung-key"
+  description = "This key is used for encryption"
 }
 
 variable "MyIP" {
@@ -37,6 +43,7 @@ variable "MyIP" {
 
 variable "KeyPairName" {
   default = "trung-ec2-key"
+  description = "This key is used for SSH"
 }
 
 variable "KopsBucketName" {
