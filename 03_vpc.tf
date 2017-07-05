@@ -14,7 +14,7 @@ resource "aws_internet_gateway" "kubernetes" {
 
 # public subnet that is used for an EC2 instance on which we use it as a jumphost
 resource "aws_subnet" "kops-jumphost" {
-  cidr_block = "10.10.10.0/24"
+  cidr_block = "10.15.255.0/24"
   vpc_id = "${aws_vpc.kubernetes.id}"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
 

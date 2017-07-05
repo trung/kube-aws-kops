@@ -5,7 +5,7 @@ resource "aws_instance" "kops-jumphost" {
   subnet_id = "${aws_subnet.kops-jumphost.id}"
   key_name = "${var.KeyPairName}"
   associate_public_ip_address = true
-  iam_instance_profile = "AmazonS3ReadOnlyAccess"
+  iam_instance_profile = "s3_read_only"
 
   user_data = "${data.template_file.install_kops.rendered}"
 

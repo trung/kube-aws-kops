@@ -13,8 +13,8 @@ data "aws_iam_policy_document" "k8s-jpmchase-net-state-store" {
       "s3:*",
     ]
     resources = [
-      "arn:aws:s3:::${var.KopsBucketName}",
-      "arn:aws:s3:::${var.KopsBucketName}/*",
+      "arn:aws:s3:::${var.KopsBucketNamePrefix}-${random_id.s3-postfix.hex}",
+      "arn:aws:s3:::${var.KopsBucketNamePrefix}-${random_id.s3-postfix.hex}/*",
     ]
     principals {
       identifiers = ["*"]
@@ -30,8 +30,8 @@ data "aws_iam_policy_document" "k8s-binaries-repository" {
       "s3:*",
     ]
     resources = [
-      "arn:aws:s3:::${var.BinariesRepositoryBucketName}",
-      "arn:aws:s3:::${var.BinariesRepositoryBucketName}/*",
+      "arn:aws:s3:::${var.BinariesRepositoryBucketNamePrefix}-${random_id.s3-postfix.hex}",
+      "arn:aws:s3:::${var.BinariesRepositoryBucketNamePrefix}-${random_id.s3-postfix.hex}/*",
     ]
     principals {
       identifiers = ["*"]
@@ -47,10 +47,10 @@ data "aws_iam_policy_document" "kops-jumphost" {
       "s3:*",
     ]
     resources = [
-      "arn:aws:s3:::${var.KopsBucketName}",
-      "arn:aws:s3:::${var.KopsBucketName}/*",
-      "arn:aws:s3:::${var.BinariesRepositoryBucketName}",
-      "arn:aws:s3:::${var.BinariesRepositoryBucketName}/*",
+      "arn:aws:s3:::${var.KopsBucketNamePrefix}-${random_id.s3-postfix.hex}",
+      "arn:aws:s3:::${var.KopsBucketNamePrefix}-${random_id.s3-postfix.hex}/*",
+      "arn:aws:s3:::${var.BinariesRepositoryBucketNamePrefix}-${random_id.s3-postfix.hex}",
+      "arn:aws:s3:::${var.BinariesRepositoryBucketNamePrefix}-${random_id.s3-postfix.hex}/*",
     ]
     principals {
       identifiers = ["*"]

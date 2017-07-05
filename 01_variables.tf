@@ -29,7 +29,7 @@ variable "JumpHostInstanceType" {
 }
 
 variable "VpcCidr" {
-  default = "10.10.0.0/16"
+  default = "10.15.0.0/16"
 }
 
 variable "KmsKeyAlias" {
@@ -46,11 +46,11 @@ variable "KeyPairName" {
   description = "This key is used for SSH"
 }
 
-variable "KopsBucketName" {
+variable "KopsBucketNamePrefix" {
   default = "k8s-jpmchase-net-state-store"
 }
 
-variable "BinariesRepositoryBucketName" {
+variable "BinariesRepositoryBucketNamePrefix" {
   default = "k8s-binaries-repository"
 }
 

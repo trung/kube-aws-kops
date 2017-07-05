@@ -7,7 +7,7 @@ output "AZs" {
 }
 
 output "StateBucket" {
-  value = "${var.KopsBucketName}"
+  value = "${aws_s3_bucket.k8s-jpmchase-net-state-store.id}"
 }
 
 output "VPCId" {

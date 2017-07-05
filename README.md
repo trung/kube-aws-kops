@@ -24,6 +24,8 @@ kops create cluster ${NAME} \
  --api-loadbalancer-type internal \
  --zones ${AZs} \
  --master-zones ${AZs} \
+ --master-size t2.medium \
+ --node-size t2.medium \
  --cloud aws \
  --cloud-labels "BuiltBy=trung,BuiltReason=Provisioning Kuberenetes in AWS using Kops" \
  --vpc ${VPC} \
