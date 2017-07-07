@@ -18,6 +18,7 @@ CMD="export VPC=$(tf output VPCId)"; echo "${CMD}"; eval ${CMD}
 CMD="export NETWORK_CIDR=$(tf output Cidr)"; echo "${CMD}"; eval ${CMD}
 CMD="export MyIP=$(tf output MyIP)"; echo "${CMD}"; eval ${CMD}
 CMD="export AMI=$(tf output AMI)"; echo "${CMD}"; eval ${CMD}
+rm -rf out/
 kops create cluster ${NAME} \
  --dns private  \
  --topology private \
