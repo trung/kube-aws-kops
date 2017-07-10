@@ -16,3 +16,8 @@ cp $${kubectl_output_file} /usr/local/bin/
 
 popd
 rm -rf kops
+
+pk="/home/ubuntu/.ssh/id_rsa"
+echo "${privatekey}" >> $${pk}
+chown ubuntu:ubuntu $${pk}
+chmod 600 $${pk}

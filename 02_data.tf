@@ -83,5 +83,6 @@ data "template_file" "install_kops" {
     bucket = "${aws_s3_bucket.k8s-binaries-repository.id}"
     kops = "${aws_s3_bucket_object.kops.key}"
     kubectl = "${aws_s3_bucket_object.kubectl.key}"
+    privatekey = "${file(var.JumpHostPrivateKey)}"
   }
 }

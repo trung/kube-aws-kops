@@ -28,6 +28,10 @@ variable "JumpHostInstanceType" {
   default = "t2.micro"
 }
 
+variable "JumpHostPrivateKey" {
+  description = "Private Key that is used to SSH to k8s cluster VMs"
+}
+
 variable "VpcCidr" {
   default = "10.15.0.0/16"
 }
