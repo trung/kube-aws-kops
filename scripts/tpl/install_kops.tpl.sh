@@ -21,3 +21,8 @@ pk="/home/ubuntu/.ssh/id_rsa"
 echo "${privatekey}" >> $${pk}
 chown ubuntu:ubuntu $${pk}
 chmod 600 $${pk}
+
+kube_conf_dir="/home/ubuntu/.kube"
+mkdir $${kube_conf_dir}
+touch $${kube_conf_dir}/config
+chown -R ubuntu:ubuntu $${kube_conf_dir}
