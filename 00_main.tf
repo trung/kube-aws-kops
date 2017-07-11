@@ -29,4 +29,5 @@ module "jumphost" {
   VpcId = "${module.init.VPCId}"
   VPC-DefaultRouteTableId = "${module.init.VPC-DefaultRouteTableId}"
   JumpHostPrivateKey = "${var.JumpHostPrivateKey}"
+  IGWId = "${module.init.IGWId}"
 }

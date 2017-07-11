@@ -25,3 +25,7 @@ output "AZs" {
 output "AMI" {
   value = "${lookup(var.AvailableAMIs, var.region)}"
 }
+
+output "IGWId" {
+  value = "${aws_internet_gateway.kubernetes.id}"
+}

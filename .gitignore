@@ -4,6 +4,8 @@
 **/.terraform.tfstate.lock.info
 .idea/
 **/terraform.tfvars
-**/out/
+**/out/terraform/data
+**/out/terraform/kubernetes.tf
 **/bin/kops*
 **/bin/kubectl*
+**/*.log

@@ -19,14 +19,25 @@ data "external" "RunKops" {
     "${var.AZs}",
     "${var.VPCId}",
     "${var.VPC_CIDR}",
-    "${var.StateStore}",
-    "${var.AMI}"
+    "s3://${var.StateStore}",
+    "${var.AMI}",
+    "${path.module}/kops-key.pub"
   ]
 }
 
 module "kops_tf" {
   source = "./out/terraform"
-  dummy = "${data.external.RunKops.id}"
+  dummy = "${}"
+}
+
+data "external" "DeleteGeneratedTerraform" {
+  program = [
+    "rm",
+    "-rf",
+    "${path.module}/out/terraform/data",
+    "${module.kops_tf.dummy}"
+  ]
+  depends_on = ["data.external.RunKops"]
 }
 
 output "KubeConfigPath" {

@@ -4,3 +4,9 @@ resource "aws_vpc" "kubernetes" {
 
   tags = "${merge(var.CommonTags, map("Name", format("%s-vpc", var.Name)))}"
 }
+
+resource "aws_internet_gateway" "kubernetes" {
+  vpc_id = "${aws_vpc.kubernetes.id}"
+
+  tags = "${merge(var.CommonTags, map("Name", format("%s-igw", var.Name)))}"
+}

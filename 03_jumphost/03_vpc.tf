@@ -1,8 +1,3 @@
-resource "aws_internet_gateway" "kubernetes" {
-  vpc_id = "${var.VpcId}"
-
-  tags = "${merge(var.CommonTags, map("Name", format("%s-igw", var.Name)))}"
-}
 
 # public subnet that is used for an EC2 instance on which we use it as a jumphost
 resource "aws_subnet" "kops-jumphost" {
@@ -18,7 +13,7 @@ resource "aws_default_route_table" "kops-jumphost" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.kubernetes.id}"
+    gateway_id = "${var.IGWId}"
   }
 
   tags = "${merge(var.CommonTags, map("Name", "K8s-kops-jumphost-DefaultRoute"))}"

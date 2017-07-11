@@ -54,6 +54,10 @@ variable "VpcId" {
 
 }
 
+variable "IGWId" {
+
+}
+
 variable "KubeConfig" {
 
 }

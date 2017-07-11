@@ -18,7 +18,7 @@ resource "aws_s3_bucket_object" "kops" {
   # FIXME not able to find out a way to get the object with SSE
   # kms_key_id = "${data.aws_kms_alias.KmsKey.arn}"
 
-  source = "${var.K8sBinaries["kops.outputFile"]}"
+  source = "${format("%s/%s", path.module, var.K8sBinaries["kops.outputFile"])}"
   content_type = "application/octet-stream"
   depends_on = ["data.external.Download-Kops"]
 
@@ -32,7 +32,7 @@ resource "aws_s3_bucket_object" "kubectl" {
   # FIXME not able to find out a way to get the object with SSE
   # kms_key_id = "${data.aws_kms_alias.KmsKey.arn}"
 
-  source = "${var.K8sBinaries["kubectl.outputFile"]}"
+  source = "${format("%s/%s", path.module, var.K8sBinaries["kubectl.outputFile"])}"
   content_type = "application/octet-stream"
   depends_on = ["data.external.Download-Kubectl"]
 

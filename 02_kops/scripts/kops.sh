@@ -1,14 +1,14 @@
 #!/bin/bash
 
-rm -rf out/terraform/data
-rm -rf out/terraform/kubernetes.tf
-
 NAME="$1"
 AZs="$2"
 VPC="$3"
 NETWORK_CIDR="$4"
 KOPS_STATE_STORE="$5"
 AMI="$6"
+SSH_PUBLIC_KEY="$7"
+
+export AWS_PROFILE=lab
 kops create cluster ${NAME} \
  --dns private  \
  --topology private \
@@ -24,8 +24,10 @@ kops create cluster ${NAME} \
  --networking calico \
  --state ${KOPS_STATE_STORE} \
  --admin-access ${NETWORK_CIDR} \
- --ssh-public-key ./kops-key.pub \
+ --ssh-public-key ${SSH_PUBLIC_KEY} \
  --image ${AMI} \
- --target terraform
+ --target terraform > kops_create.log 2>&1
 
-echo "{}"
+kops_create_return="$?"
+
+echo "{\"kops_create\" : \"${kops_create_return}\"}"

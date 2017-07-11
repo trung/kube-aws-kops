@@ -24,5 +24,5 @@ chmod 600 $${pk}
 
 kube_conf_dir="/home/ubuntu/.kube"
 mkdir $${kube_conf_dir}
-touch $${kube_conf_dir}/config
+echo "${kubeconfig}" > $${kube_conf_dir}/config
 chown -R ubuntu:ubuntu $${kube_conf_dir}
