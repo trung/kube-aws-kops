@@ -7,8 +7,9 @@ NETWORK_CIDR="$4"
 KOPS_STATE_STORE="$5"
 AMI="$6"
 SSH_PUBLIC_KEY="$7"
+AWS_PROFILE="$8"
 
-export AWS_PROFILE=lab
+export AWS_PROFILE=${AWS_PROFILE}
 kops create cluster ${NAME} \
  --dns private  \
  --topology private \

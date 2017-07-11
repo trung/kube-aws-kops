@@ -9,3 +9,4 @@
 **/bin/kops*
 **/bin/kubectl*
 **/*.log
+**/*.output
