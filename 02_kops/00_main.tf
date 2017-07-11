@@ -21,6 +21,13 @@ variable "IGWId" {
 variable "VPC_DefaultRouteTableId" {
 }
 
+variable "MasterInstanceType" {
+  default = "t2.medium"
+}
+
+variable "NodeInstanceType" {
+  default = "t2.medium"
+}
 
 data "external" "RunKops" {
   program = [
@@ -33,7 +40,9 @@ data "external" "RunKops" {
     "s3://${var.StateStore}",
     "${var.AMI}",
     "${path.module}/kops-key.pub",
-    "${var.AWSProfile}"
+    "${var.AWSProfile}",
+    "${var.MasterInstanceType}",
+    "${var.NodeInstanceType}"
   ]
 }
 

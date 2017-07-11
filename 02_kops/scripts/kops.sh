@@ -8,6 +8,8 @@ KOPS_STATE_STORE="$5"
 AMI="$6"
 SSH_PUBLIC_KEY="$7"
 AWS_PROFILE="$8"
+MASTER_INSTANCE_TYPE="$9"
+NODE_INSTANCE_TYPE="${10}"
 
 export AWS_PROFILE=${AWS_PROFILE}
 kops create cluster ${NAME} \
@@ -16,8 +18,8 @@ kops create cluster ${NAME} \
  --api-loadbalancer-type internal \
  --zones ${AZs} \
  --master-zones ${AZs} \
- --master-size t2.medium \
- --node-size t2.medium \
+ --master-size ${MASTER_INSTANCE_TYPE} \
+ --node-size ${NODE_INSTANCE_TYPE} \
  --cloud aws \
  --cloud-labels "BuiltBy=trung,BuiltReason=Provisioning Kuberenetes in AWS using Kops" \
  --vpc ${VPC} \
