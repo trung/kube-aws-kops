@@ -6,7 +6,7 @@ Run `tf plan` and `tf apply` in order:
    ```
    tf apply
    ```
-+  `02_kops`: Run `kops create cluster` to generate Terraform templates and run them as module
+1. `02_kops`: Run `kops create cluster` to generate Terraform templates and run them as module
    When destroy, must run `kops delete cluster` due to TF templates don't contain resources that are created dynamically (e.g: route53 entries)
    ```
    # apply
@@ -16,7 +16,7 @@ Run `tf plan` and `tf apply` in order:
    tf destroy -var-file=../01_init/tfvars.output
    kops delete cluster
    ```
-+  `03_jumphost`: Create a jumphost, populate private key and kube config to home folder
+1. `03_jumphost`: Create a jumphost, populate private key and kube config to home folder
    ```
    tf apply -var-file=../02_kops/tfvars.output
    ```
