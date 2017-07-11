@@ -27,17 +27,7 @@ data "external" "RunKops" {
 
 module "kops_tf" {
   source = "./out/terraform"
-  dummy = "${}"
-}
-
-data "external" "DeleteGeneratedTerraform" {
-  program = [
-    "rm",
-    "-rf",
-    "${path.module}/out/terraform/data",
-    "${module.kops_tf.dummy}"
-  ]
-  depends_on = ["data.external.RunKops"]
+  dummy = "${data.external.RunKops.id}"
 }
 
 output "KubeConfigPath" {
