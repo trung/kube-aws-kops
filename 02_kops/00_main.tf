@@ -1,3 +1,14 @@
+terraform {
+  backend "s3" {
+    profile = "lab"
+    region = "eu-central-1"
+
+    bucket = "tf-state-store-dev"
+    key = "kube-aws-kops/02_kops/terraform.state"
+    dynamodb_table = "tf-lock"
+  }
+}
+
 variable "Name" {
 }
 variable "AZs" {
