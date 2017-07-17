@@ -42,15 +42,6 @@ data "aws_iam_policy_document" "kops-jumphost" {
   }
 }
 
-
-data "external" "Download-Kops" {
-  program = ["sh",
-    "${path.module}/scripts/download.sh",
-    "${var.K8sBinaries["kops.url"]}",
-    "${format("%s/%s", path.module, var.K8sBinaries["kops.outputFile"])}"
-  ]
-}
-
 data "external" "Download-Kubectl" {
   program = ["sh",
     "${path.module}/scripts/download.sh",
@@ -64,7 +55,6 @@ data "template_file" "install_kops" {
   vars {
     region = "${var.region}"
     bucket = "${aws_s3_bucket.k8s-binaries-repository.id}"
-    kops = "${aws_s3_bucket_object.kops.key}"
     kubectl = "${aws_s3_bucket_object.kubectl.key}"
     privatekey = "${file(var.JumpHostPrivateKey)}"
     kubeconfig = "${file(var.KubeConfig)}"

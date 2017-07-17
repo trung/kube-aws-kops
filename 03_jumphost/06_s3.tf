@@ -11,20 +11,6 @@ resource "aws_s3_bucket" "k8s-binaries-repository" {
   tags  = "${var.CommonTags}"
 }
 
-resource "aws_s3_bucket_object" "kops" {
-  bucket = "${aws_s3_bucket.k8s-binaries-repository.bucket}"
-  key = "kops"
-
-  # FIXME not able to find out a way to get the object with SSE
-  # kms_key_id = "${data.aws_kms_alias.KmsKey.arn}"
-
-  source = "${format("%s/%s", path.module, var.K8sBinaries["kops.outputFile"])}"
-  content_type = "application/octet-stream"
-  depends_on = ["data.external.Download-Kops"]
-
-  tags = "${var.CommonTags}"
-}
-
 resource "aws_s3_bucket_object" "kubectl" {
   bucket = "${aws_s3_bucket.k8s-binaries-repository.bucket}"
   key = "kubectl"

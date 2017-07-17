@@ -1,10 +1,10 @@
 #!/bin/bash
 
-order=("01_init" "02_kops" "03_jumphost")
+order=("03_jumphost" "02_kops" "01_init")
 
 for m in ${order[@]}; do
   pushd $m
-  ./apply.sh
+  ./destroy.sh
   popd
 done
 
