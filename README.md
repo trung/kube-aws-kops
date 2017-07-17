@@ -1,7 +1,7 @@
 # kube-aws-kops
 Kubernetes private cluster in AWS using Kops and Terraform. **All access via a jumphost**
 
-Run `tf plan` and `tf apply` in order:
+Run `tf init` once in each and `tf plan` and `tf apply` in order:
 1. `01_init`: Initialize the infra like: create a new VPC, attach an Internet Gateway, create DNS, S3 Bucket for kops state store
    ```
    tf apply
