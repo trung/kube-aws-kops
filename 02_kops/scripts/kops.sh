@@ -17,7 +17,6 @@ kops create cluster ${NAME} \
  --topology private \
  --api-loadbalancer-type internal \
  --zones ${AZs} \
- --master-zones ${AZs} \
  --master-size ${MASTER_INSTANCE_TYPE} \
  --node-size ${NODE_INSTANCE_TYPE} \
  --cloud aws \

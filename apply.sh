@@ -1,10 +1,13 @@
 #!/bin/bash
 
-cd 01_init
-tf apply
+pushd 01_init
+terraform apply
+popd
 
-cd 02_kops
-tf apply -var-file=../01_init/tfvars.output
+pushd 02_kops
+terraform apply -var-file=../01_init/tfvars.output
+popd
 
-cd 03_jumphost
-tf apply -var-file=../02_kops/tfvars.output
+pushd 03_jumphost
+terraform apply -var-file=../02_kops/tfvars.output
+popd

@@ -57,6 +57,11 @@ data "external" "RunKops" {
   ]
 }
 
+provider "aws" {
+  region = "eu-central-1"
+  profile = "lab"
+}
+
 module "kops_tf" {
   source = "./out/terraform"
   dummy = "${data.external.RunKops.id}"
