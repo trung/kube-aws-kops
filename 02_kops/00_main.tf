@@ -1,36 +1,33 @@
 terraform {
   backend "s3" {
     profile = "lab"
-    region = "eu-central-1"
+    region  = "eu-central-1"
 
-    bucket = "tf-state-store-dev"
-    key = "kube-aws-kops/02_kops/terraform.state"
+    bucket         = "tf-state-store-dev"
+    key            = "kube-aws-kops/02_kops/terraform.state"
     dynamodb_table = "tf-lock"
   }
 }
 
-variable "Name" {
-}
-variable "AZs" {
-}
-variable "VPCId" {
-}
-variable "VPC_CIDR" {
-}
-variable "StateStore" {
-}
-variable "AMI" {
-}
+variable "Name" {}
+
+variable "AZs" {}
+
+variable "VPCId" {}
+
+variable "VPC_CIDR" {}
+
+variable "StateStore" {}
+
+variable "AMI" {}
+
 variable "AWSProfile" {
   default = "lab"
 }
 
-variable "IGWId" {
+variable "IGWId" {}
 
-}
-
-variable "VPC_DefaultRouteTableId" {
-}
+variable "VPC_DefaultRouteTableId" {}
 
 variable "MasterInstanceType" {
   default = "t2.medium"
@@ -53,18 +50,18 @@ data "external" "RunKops" {
     "${path.module}/kops-key.pub",
     "${var.AWSProfile}",
     "${var.MasterInstanceType}",
-    "${var.NodeInstanceType}"
+    "${var.NodeInstanceType}",
   ]
 }
 
 provider "aws" {
-  region = "eu-central-1"
+  region  = "eu-central-1"
   profile = "lab"
 }
 
 module "kops_tf" {
   source = "./out/terraform"
-  dummy = "${data.external.RunKops.id}"
+  dummy  = "${data.external.RunKops.id}"
 }
 
 resource "local_file" "tfvars-output" {
@@ -76,6 +73,7 @@ StateStore="${var.StateStore}"
 VPC-DefaultRouteTableId="${var.VPC_DefaultRouteTableId}"
 VpcId="${var.VPCId}"
 EOF
+
   filename = "${path.module}/tfvars.output"
 }
 

@@ -9,6 +9,7 @@ VPCId="${aws_vpc.kubernetes.id}"
 IGWId="${aws_internet_gateway.kubernetes.id}"
 VPC_DefaultRouteTableId="${aws_vpc.kubernetes.default_route_table_id}"
 EOF
+
   filename = "${path.module}/tfvars.output"
 }
 

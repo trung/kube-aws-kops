@@ -8,9 +8,10 @@ variable "Name" {
 
 variable "CommonTags" {
   type = "map"
+
   default = {
-    BuiltBy = "trung"
-    BuiltWith = "terraform"
+    BuiltBy     = "trung"
+    BuiltWith   = "terraform"
     BuiltReason = "Provisioning Kubernetes in AWS using Kops"
   }
 }
@@ -25,9 +26,10 @@ variable "KopsBucketNamePrefix" {
 
 variable "AvailableAMIs" {
   type = "map"
+
   default = {
-    us-west-1 = "ami-9fe6c7ff"
-    us-west-2 = "ami-45224425"
+    us-west-1    = "ami-9fe6c7ff"
+    us-west-2    = "ami-45224425"
     eu-central-1 = "ami-a74c95c8"
   }
 }
